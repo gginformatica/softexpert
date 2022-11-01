@@ -1,17 +1,17 @@
 <?php
 
-class SaleController extends Controller {
+class ProductTypeController extends Controller {
     public function index()
     {
         $test = 'Testing';
         echo 'Testando home';
     }
-    public function sales()
+    public function create()
     {
         $test = 'Testing';
         echo 'Sales Testing';
     }
-    public function products()
+    public function store()
     {
         $test = 'Testing';
         echo 'Products Testing';

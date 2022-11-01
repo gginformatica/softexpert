@@ -3,7 +3,7 @@ class Controller {
     protected $url, $id, $action;
 
     public function __construct($action = null) {
-        echo $_SERVER['REQUEST_METHOD'];
+        // echo $_SERVER['REQUEST_METHOD'];
         $this->action = $action;
 
         $this->doAction();

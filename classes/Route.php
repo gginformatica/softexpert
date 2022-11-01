@@ -3,16 +3,27 @@ class Route {
     public static $routes = [];
 
     public static function setup($route, $function) {
-        if(preg_match('/\\{(.*?)\\}/', $route, $match) == 1) {
-            echo 'Deu match '.$match[0];
-        }
+        
+        $resourcePath = self::resolveResourcePath();
+        list ($url, $id, $action) = self::resolveParams(...explode('/', $resourcePath));
         self::$routes[] = $route;
 
-        if(!isset($param_url)) {
-            $param_url = '';
+        if( $route === $url ) {
+            $function->__invoke();
         }
-        
-        $function->__invoke();
+    }
+
+    private static function resolveResourcePath() {
+        if(strpos($_SERVER['PHP_SELF'], 'index.php/')) {
+            $phpSelf = explode('/index.php/', $_SERVER['PHP_SELF']);
+        } else {
+            $phpSelf = explode('/index.php', $_SERVER['PHP_SELF']);
+        }
+        return end($phpSelf);
+    }
+
+    private static function resolveParams($url, $id = null, $action  = null) {
+        return [$url, $id, $action];
     }
 }
 
