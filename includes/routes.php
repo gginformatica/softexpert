@@ -5,9 +5,17 @@ Route::setup('', function() {
 });
 
 Route::setup('sales', function() {
-    new SaleController('sales');
+    new SaleController('index');
 });
 
 Route::setup('products', function() {
-    new SaleController('products');
+    new ProductController('index');
+});
+
+Route::setup('types', function() {
+    new ProductTypeController('index');
+});
+
+Route::setup('taxes', function() {
+    new ProductTypeController('index');
 });

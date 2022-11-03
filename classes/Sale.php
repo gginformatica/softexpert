@@ -1,5 +1,4 @@
 <?php
-use Model;
 
 class Sale extends Model {
 

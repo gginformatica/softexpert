@@ -29,6 +29,19 @@ class Model {
         return self::find($id);
     }
 
+    public function update(array $args) : ?Object
+    {
+        $db = new Database();
+        $id = $db->update(static::$table, $args, ['id' => $this->id], static::$fillable);
+        return self::find($this->id);
+    }
+
+    public function delete() : ?int
+    {
+        $db = new Database();
+        return $db->delete(static::$table, ['id' => $this->id]);
+    }
+
     public static function find(int $id) : ?Object
     {
         $db = new Database();

@@ -1,19 +1,30 @@
 <?php
 
 class ProductTypeController extends Controller {
+    protected $model = 'ProductType';
+
     public function index()
     {
-        $test = 'Testing';
-        echo 'Testando home';
+        $this->throw(json_encode(ProductType::all()));
     }
-    public function create()
+
+    public function store(array $inputs)
     {
-        $test = 'Testing';
-        echo 'Sales Testing';
+        $productType = ProductType::create($inputs);
+        $this->throw(json_encode($productType));
     }
-    public function store()
+
+    public function update(ProductType $productType, array $inputs)
     {
-        $test = 'Testing';
-        echo 'Products Testing';
+        $updatedProductType = $productType->update($inputs);
+        $this->throw(json_encode($updatedProductType));
+    }
+
+    public function destroy(ProductType $productType)
+    {
+        $deleted = $productType->delete();
+        if($deleted)
+            $this->throw(json_encode(['deleted' => $productType]));
+        $this->throw(json_encode(['erorr' => 'There was an error while trying to delete this record. Record not found.']));
     }
 }

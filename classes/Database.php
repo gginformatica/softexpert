@@ -39,6 +39,41 @@ class Database {
         }
     }
 
+    public function update(string $table, array $data, array $whereClause, array $fillable) : int
+    {
+        $values = [];
+        foreach($data as $key => $value) {
+            if(! in_array($key, $fillable)) {
+                unset($data[$key]);
+                continue;
+            }
+            $values[] = $key.'=:'.$key;
+            $data[':'.$key] = $value;
+            unset($data[$key]);
+        }
+
+        $where = [];
+        foreach($whereClause as $key => $value) {
+            $where[] = $key.'=:wc'.$key;
+            $whereClause[':wc'.$key] = $value;
+            unset($whereClause[$key]);
+        }
+
+        $sql = sprintf('update %s set '.implode(',', $values).' where '.implode('and', $where), $table);
+        
+        try {
+            $query = $this->con->prepare($sql);
+            $query->execute(array_merge($data, $whereClause));
+            $query->fetch(PDO::FETCH_OBJ);
+            
+            return $query->rowCount();
+
+        } catch(PDOException $e) {
+            error_log($e->getMessage(), 3 ,__DIR__.'/../errors.log');
+            return 0;
+        }
+    }
+
     public function selectById(string $table, int $id) : ? Object
     {
         $sql = sprintf('select * from %s where id = :id limit 1', $table);
@@ -48,11 +83,11 @@ class Database {
             $query->execute([':id' => $id]);
             $result = $query->fetch(PDO::FETCH_OBJ);
             
-            return $result;
+            return $result ? $result : null;
 
         } catch(PDOException $e) {
             error_log($e->getMessage(), 3 ,__DIR__.'/../errors.log');
-            return 0;
+            return null;
         }
     }
 
@@ -66,6 +101,32 @@ class Database {
             $result = $query->fetchAll(PDO::FETCH_OBJ);
             
             return $result;
+
+        } catch(PDOException $e) {
+            error_log($e->getMessage(), 3 ,__DIR__.'/../errors.log');
+            return 0;
+        }
+    }
+
+
+    public function delete(string $table, array $whereClause) : int
+    {
+
+        $where = [];
+        foreach($whereClause as $key => $value) {
+            $where[] = $key.'=:wc'.$key;
+            $whereClause[':wc'.$key] = $value;
+            unset($whereClause[$key]);
+        }
+
+        $sql = sprintf('delete from %s where '.implode('and', $where), $table);
+        
+        try {
+            $query = $this->con->prepare($sql);
+            $query->execute($whereClause);
+            $query->fetch(PDO::FETCH_OBJ);
+            
+            return $query->rowCount();
 
         } catch(PDOException $e) {
             error_log($e->getMessage(), 3 ,__DIR__.'/../errors.log');
