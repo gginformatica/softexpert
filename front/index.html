@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>SoftExpert</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body style="background: var(--bs-gray-300);">
+    <div class="card" id="sale-container">
+        <div class="card-header"><img src="https://www.softexpert.com/wp-content/uploads/2021/03/logo-home.png">
+            <ul id="main-nav">
+                <li class="active"><a href="index.html">Vender</a></li>
+                <li><a href="sales.html">Vendas</a></li>
+                <li><a href="products.html">Produtos</a></li>
+                <li><a href="product-types.html">Tipos de Produtos</a></li>
+                <li><a href="taxes.html">Impostos</a></li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col col">
+                        <h1>Item</h1>
+                    </div>
+                    <div class="col">
+                        <h1>Preço Uni</h1>
+                    </div>
+                    <div class="col">
+                        <h1>Quantidade</h1>
+                    </div>
+                    <div class="col">
+                        <h1>Preço</h1>
+                    </div>
+                    <div class="col">
+                        <h1>Imposto</h1>
+                    </div>
+                    <div class="col">
+                        <h1>Subtotal</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col">
+                        <h1>Item</h1>
+                    </div>
+                    <div class="col">
+                        <h1>Preço Uni</h1>
+                    </div>
+                    <div class="col">
+                        <h1>Quantidade</h1>
+                    </div>
+                    <div class="col">
+                        <h1>Preço</h1>
+                    </div>
+                    <div class="col">
+                        <h1>Imposto</h1>
+                    </div>
+                    <div class="col">
+                        <h1>Subtotal</h1><button class="btn btn-sm remove-item" type="button"><i class="far fa-times-circle"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="container-fluid">
+                <div class="row totals">
+                    <div class="col col">
+                        <h1>Totais&nbsp;</h1><i class="fas fa-long-arrow-alt-right"></i>
+                    </div>
+                    <div class="col"></div>
+                    <div class="col">
+                        <h1 id="qty_total">0</h1>
+                    </div>
+                    <div class="col">
+                        <h1 id="price_total">R$ 0,00</h1>
+                    </div>
+                    <div class="col">
+                        <h1 id="tax_total">R$ 0,00</h1>
+                    </div>
+                    <div class="col">
+                        <h1 id="general_total">R$ 0,00</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="d-none" id="search-products">
+                            <ul>
+                                <li>Item 1</li>
+                                <li>Item 2</li>
+                                <li>Item 3</li>
+                                <li>Item 4</li>
+                            </ul>
+                        </div>
+                        <form class="d-xl-flex justify-content-xl-center" id="formSale"><input class="form-control form-control-lg" type="text" name="product" placeholder="Código do produto" autocomplete="off"><input class="form-control form-control-lg" type="number" name="qty" placeholder="Quantidade" autocomplete="off" inputmode="numeric" min="1" value="1"><button class="btn btn-primary mt-0 mb-0 m-2" type="submit">Adicionar</button><button class="btn btn-primary" id="finishSale" type="button">Finalizar</button></form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/sale.js"></script>
+</body>
+
+</html>

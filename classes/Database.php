@@ -146,8 +146,10 @@ class Database {
 
     public function allWithRelations(string $table, array $relations) : ?array
     {
-        $sql = 'select distinct '.$table.'.*, '.implode(',', $relations['fields']).' from '.$table.' ';
-        unset($relations['fields']);
+        $sql = 'select ';
+        $sql .= $table == isset($relations['distinct']) ? 'distinct ' : '';
+        $sql .= $table.'.*, '.implode(',', $relations['fields']).' from '.$table.' ';
+        unset($relations['fields'], $relations['distinct']);
         foreach($relations as $relation) {
             $sql .= $relation['join'].' '.$relation['table'].' on '. $relation['on'].' ';
         }
