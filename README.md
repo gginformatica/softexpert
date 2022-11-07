@@ -8,6 +8,11 @@ Use o composer para instalar as dependencias
 composer install
 ```
 
+Iporte a base de dados
+```psql
+psql -U postgres -d other -1 -f softexpertstore.sql
+```
+
 ## Como usar
 Após a instalação, dentro da pasta raíz do projeto, execute o seguinte comando (Importante usar a porta 8080 pois as urls já estão a olhar para esta porta)
 
