@@ -19,7 +19,7 @@ Após a instalação, dentro da pasta raíz do projeto, execute o seguinte coman
 ``` php
 php -S localhost:8080
 ```
-[Acesse]http:/localhost:8080/front
+<a href="http:/localhost:8080/front" target="_blank">Acesse</a>
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
