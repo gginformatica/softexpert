@@ -17,5 +17,5 @@ Route::setup('types', function() {
 });
 
 Route::setup('taxes', function() {
-    new ProductTypeController('index');
+    new TaxController('index');
 });

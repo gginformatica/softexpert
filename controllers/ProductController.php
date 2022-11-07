@@ -5,7 +5,8 @@ class ProductController extends Controller {
 
     public function index()
     {
-        $this->throw(json_encode(Product::all()));
+        $products = Product::all(true);
+        $this->throw(json_encode($products));
     }
 
     public function store(array $inputs)

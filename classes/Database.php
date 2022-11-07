@@ -74,9 +74,19 @@ class Database {
         }
     }
 
-    public function selectById(string $table, int $id) : ? Object
+    public function selectById(string $table, int $id, array $relations) : ? Object
     {
-        $sql = sprintf('select * from %s where id = :id limit 1', $table);
+        if(empty($relations)) {
+            $sql = sprintf('select * from %s where id = :id limit 1', $table);
+        } else {
+            $sql = 'select '.$table.'.*, '.implode(',', $relations['fields']).' from '.$table.' ';
+            unset($relations['fields']);
+            foreach($relations as $relation) {
+                $sql .= $relation['join'].' '.$relation['table'].' on '. $relation['on'].' ';
+            }
+            $sql .= 'where '.$table.'.id=:id ';
+            $sql .= 'order by '.$table.'.id asc';
+        }
         
         try {
             $query = $this->con->prepare($sql);
@@ -93,7 +103,7 @@ class Database {
 
     public function selectAll(string $table) : ? array
     {
-        $sql = sprintf('select * from %s', $table);
+        $sql = sprintf('select * from %s order by id asc', $table);
         
         try {
             $query = $this->con->prepare($sql);
@@ -104,7 +114,7 @@ class Database {
 
         } catch(PDOException $e) {
             error_log($e->getMessage(), 3 ,__DIR__.'/../errors.log');
-            return 0;
+            return null;
         }
     }
 
@@ -131,6 +141,28 @@ class Database {
         } catch(PDOException $e) {
             error_log($e->getMessage(), 3 ,__DIR__.'/../errors.log');
             return 0;
+        }
+    }
+
+    public function allWithRelations(string $table, array $relations) : ?array
+    {
+        $sql = 'select distinct '.$table.'.*, '.implode(',', $relations['fields']).' from '.$table.' ';
+        unset($relations['fields']);
+        foreach($relations as $relation) {
+            $sql .= $relation['join'].' '.$relation['table'].' on '. $relation['on'].' ';
+        }
+        $sql .= 'order by '.$table.'.id asc';
+        
+        try {
+            $query = $this->con->prepare($sql);
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_OBJ);
+            
+            return $result;
+
+        } catch(PDOException $e) {
+            error_log($e->getMessage(), 3 ,__DIR__.'/../errors.log');
+            return null;
         }
     }
 }

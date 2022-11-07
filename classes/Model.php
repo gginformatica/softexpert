@@ -16,10 +16,10 @@ class Model {
         }
     }
 
-    public static function all(): ?array
+    public static function all(bool $withRelation = false): ?array
     {
         $db = new Database();
-        return $db->selectAll(static::$table);
+        return $withRelation ? $db->allWithRelations(static::$table, static::$relations ?? []) : $db->selectAll(static::$table);
     }
 
     public static function create(array $args) : ?Object
@@ -45,6 +45,6 @@ class Model {
     public static function find(int $id) : ?Object
     {
         $db = new Database();
-        return $db->selectById(static::$table, $id);
+        return $db->selectById(static::$table, $id, static::$relations ?? []);
     }
 }

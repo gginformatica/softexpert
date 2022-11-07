@@ -5,7 +5,7 @@ class TaxController extends Controller {
 
     public function index()
     {
-        $this->throw(json_encode(ProductTypeTax::all()));
+        $this->throw(json_encode(ProductTypeTax::all(true)));
     }
 
     public function store(array $inputs)

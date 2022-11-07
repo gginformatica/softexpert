@@ -1,3 +1,53 @@
-SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "0"
-LINE 1: insert into products (type_id, 0, 1) values ($1, $2) RETURNI...
-                                       ^SQLSTATE[HY093]: Invalid parameter number: :wcidSQLSTATE[HY093]: Invalid parameter number: :wcidSQLSTATE[HY093]: Invalid parameter number: :wcidSQLSTATE[HY093]: Invalid parameter number: :wcidSQLSTATE[HY093]: Invalid parameter number: :wcidSQLSTATE[HY093]: Invalid parameter number: :wcidSQLSTATE[HY093]: Invalid parameter number: :wcidSQLSTATE[HY093]: Invalid parameter number: :wcidSQLSTATE[HY093]: Invalid parameter number: :wcid
+SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for type integer: "undefined"
+CONTEXT:  unnamed portal parameter $1 = '...'SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near ")"
+LINE 1: insert into product_types (product) values () RETURNING id
+                                                    ^SQLSTATE[42803]: Grouping error: 7 ERROR:  column "product_types.id" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select product_types.*, product_type_taxes.amount as tax,cou...
+               ^SQLSTATE[42803]: Grouping error: 7 ERROR:  column "product_types.id" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select product_types.*, product_type_taxes.amount as tax,cou...
+               ^SQLSTATE[42803]: Grouping error: 7 ERROR:  column "product_types.id" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select product_types.*, product_type_taxes.amount as tax,cou...
+               ^SQLSTATE[42803]: Grouping error: 7 ERROR:  column "product_types.id" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select product_types.*, product_type_taxes.amount as tax,cou...
+               ^SQLSTATE[42P01]: Undefined table: 7 ERROR:  missing FROM-clause entry for table "product"
+LINE 1: ...ax,(select count(products.id) from products where product.ty...
+                                                             ^SQLSTATE[42P01]: Undefined table: 7 ERROR:  missing FROM-clause entry for table "product"
+LINE 1: ...ax,(select count(products.id) from products where product.ty...
+                                                             ^SQLSTATE[42P01]: Undefined table: 7 ERROR:  missing FROM-clause entry for table "product"
+LINE 1: ...ax,(select count(products.id) from products where product.ty...
+                                                             ^SQLSTATE[42P01]: Undefined table: 7 ERROR:  missing FROM-clause entry for table "product"
+LINE 1: ...ax,(select count(products.id) from products where product.ty...
+                                                             ^SQLSTATE[21000]: Cardinality violation: 7 ERROR:  more than one row returned by a subquery used as an expressionSQLSTATE[21000]: Cardinality violation: 7 ERROR:  more than one row returned by a subquery used as an expressionSQLSTATE[21000]: Cardinality violation: 7 ERROR:  more than one row returned by a subquery used as an expressionSQLSTATE[21000]: Cardinality violation: 7 ERROR:  more than one row returned by a subquery used as an expressionSQLSTATE[21000]: Cardinality violation: 7 ERROR:  more than one row returned by a subquery used as an expressionSQLSTATE[21000]: Cardinality violation: 7 ERROR:  more than one row returned by a subquery used as an expressionSQLSTATE[21000]: Cardinality violation: 7 ERROR:  more than one row returned by a subquery used as an expressionSQLSTATE[42803]: Grouping error: 7 ERROR:  column "product_types.name" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select product_types.*, product_type_taxes.amount as tax,(se...
+               ^SQLSTATE[42803]: Grouping error: 7 ERROR:  column "product_types.name" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select product_types.*, product_type_taxes.amount as tax,(se...
+               ^SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for type integer: "undefined"
+CONTEXT:  unnamed portal parameter $1 = '...'SQLSTATE[23502]: Not null violation: 7 ERROR:  null value in column "total" of relation "sale_items" violates not-null constraint
+DETAIL:  Failing row contains (1, 5, 74, 5.08, 1, 200, null).SQLSTATE[23502]: Not null violation: 7 ERROR:  null value in column "total" of relation "sale_items" violates not-null constraint
+DETAIL:  Failing row contains (2, 5, 68, 5.08, 2, 200, null).SQLSTATE[22P02]: Invalid text representation: 7 ERROR:  invalid input syntax for type real: ""
+CONTEXT:  unnamed portal parameter $3 = ''SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near ":"
+LINE 1: ...product_id), "tax", tax, qty, "quantity", subtotal: "subtota...
+                                                             ^SQLSTATE[23502]: Not null violation: 7 ERROR:  null value in column "sale_id" of relation "sale_items" violates not-null constraint
+DETAIL:  Failing row contains (5, null, 68, 5.08, 2, 200, 205.08).SQLSTATE[23502]: Not null violation: 7 ERROR:  null value in column "sale_id" of relation "sale_items" violates not-null constraint
+DETAIL:  Failing row contains (6, null, 73, 3.175, 1, 125, 128.175).SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near ":"
+LINE 1: ...product_id), "tax", tax, qty, "quantity", subtotal: "subtota...
+                                                             ^SQLSTATE[23502]: Not null violation: 7 ERROR:  null value in column "sale_id" of relation "sale_items" violates not-null constraint
+DETAIL:  Failing row contains (7, null, 68, 5.08, 2, 200, 205.08).SQLSTATE[23502]: Not null violation: 7 ERROR:  null value in column "sale_id" of relation "sale_items" violates not-null constraint
+DETAIL:  Failing row contains (8, null, 73, 3.175, 1, 125, 128.175).SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near ":"
+LINE 1: ...product_id), "tax", tax, qty, "quantity", subtotal: "subtota...
+                                                             ^SQLSTATE[23502]: Not null violation: 7 ERROR:  null value in column "sale_id" of relation "sale_items" violates not-null constraint
+DETAIL:  Failing row contains (9, null, 68, 5.08, 2, 200, 205.08).SQLSTATE[23502]: Not null violation: 7 ERROR:  null value in column "sale_id" of relation "sale_items" violates not-null constraint
+DETAIL:  Failing row contains (10, null, 73, 3.175, 1, 125, 128.175).SQLSTATE[42883]: Undefined function: 7 ERROR:  function json_object(integer, character varying) does not exist
+LINE 1: select sales.*, (select json_arrayagg(json_object("id", (sel...
+                                              ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.SQLSTATE[23502]: Not null violation: 7 ERROR:  null value in column "sale_id" of relation "sale_items" violates not-null constraint
+DETAIL:  Failing row contains (11, null, 68, 5.08, 2, 200, 205.08).SQLSTATE[23502]: Not null violation: 7 ERROR:  null value in column "sale_id" of relation "sale_items" violates not-null constraint
+DETAIL:  Failing row contains (12, null, 73, 3.175, 1, 125, 128.175).SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near ")"
+LINE 1: ... from sale_items where sale_items.sale_id=sales.id) as items...
+                                                             ^SQLSTATE[23502]: Not null violation: 7 ERROR:  null value in column "sale_id" of relation "sale_items" violates not-null constraint
+DETAIL:  Failing row contains (13, null, 68, 5.08, 2, 200, 205.08).SQLSTATE[23502]: Not null violation: 7 ERROR:  null value in column "sale_id" of relation "sale_items" violates not-null constraint
+DETAIL:  Failing row contains (14, null, 73, 3.175, 1, 125, 128.175).SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near ")"
+LINE 1: ... from sale_items where sale_items.sale_id=sales.id) as items...
+                                                             ^SQLSTATE[23502]: Not null violation: 7 ERROR:  null value in column "sale_id" of relation "sale_items" violates not-null constraint
+DETAIL:  Failing row contains (15, null, 68, 5.08, 2, 200, 205.08).SQLSTATE[23502]: Not null violation: 7 ERROR:  null value in column "sale_id" of relation "sale_items" violates not-null constraint
+DETAIL:  Failing row contains (16, null, 73, 3.175, 1, 125, 128.175).

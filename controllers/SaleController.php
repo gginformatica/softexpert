@@ -5,12 +5,26 @@ class SaleController extends Controller {
 
     public function index()
     {
-        $this->throw(json_encode(Sale::all()));
+        $this->throw(json_encode(Sale::all(true)));
     }
 
     public function store(array $inputs)
     {
-        $sale = Sale::create($inputs);
+        $saleInputs = ['subtotal' => $inputs['subtotal'], 'taxes' => $inputs['taxes'], 'total' => $inputs['total']];
+        $sale = Sale::create($saleInputs);
+        
+        
+        foreach($inputs['items'] as $item) {
+            SaleItem::create([
+                'sale_id' => $sale->id,
+                'product_id' => $item['id'],
+                'tax' => $item['fee'],
+                'quantity' => $item['qty'],
+                'subtotal' => $item['price'],
+                'total' => $item['subtotal']
+            ]);
+        }
+        $sale = Sale::find($sale->id);
         $this->throw(json_encode($sale));
     }
 

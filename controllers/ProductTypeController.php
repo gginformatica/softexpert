@@ -5,7 +5,7 @@ class ProductTypeController extends Controller {
 
     public function index()
     {
-        $this->throw(json_encode(ProductType::all()));
+        $this->throw(json_encode(ProductType::all(true)));
     }
 
     public function store(array $inputs)
